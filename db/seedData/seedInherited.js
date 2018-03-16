@@ -8,6 +8,7 @@ MongoClient.connect(url, function(err, client) {
   console.log('connected successfully to server');
 
   const db = client.db(dbName);
+  db.collection('inheritedrestaurants').drop();
 
   async function seedDB() {
     for (var x = 0; x < 100; x++) {
