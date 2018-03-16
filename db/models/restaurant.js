@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 var restaurantSchema = mongoose.Schema({
   name: String,
-  place_id: { type: String, unique: true },
+  place_id: { type: Number, unique: true },
   google_rating: Number,
   zagat_food_rating: Number,
   review_count: Number,
@@ -17,7 +17,7 @@ var restaurantSchema = mongoose.Schema({
   nearby: [String]
 });
 
-var RestaurantModel = mongoose.model('Restaurant', restaurantSchema);
+var RestaurantModel = mongoose.model('inheritedrestaurants', restaurantSchema);
 
 // findAll retrieves all stories
 function findAll(callback) {

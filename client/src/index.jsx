@@ -19,7 +19,7 @@ class App extends React.Component{
 
   getRecommendedRestaurants(){
     // console.log(window.location.href);
-    var id = window.location.href.split('/')[4];
+    var id = window.location.href.split('/')[4] || 10031;
     console.log('getting recommended restaurants for id: ' + id)
 
     $.ajax({

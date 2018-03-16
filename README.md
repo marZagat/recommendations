@@ -41,3 +41,6 @@ To start, in your browser navigate to: [http://localhost:3004](http://localhost:
 
 ## Tests
 Run: `npm test`
+
+## Credits
+This app was  built by another team as their Front End Capstone project and inherited as part of my team's System Design Capstone, where we improve upon the app's performance at web-scale. The front end for this service was created by @stacylin.
