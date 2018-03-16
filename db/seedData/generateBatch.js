@@ -11,7 +11,7 @@ function generateBatch(x) {
       place_id: counter,
       google_rating: faker.finance.amount(0, 5, 1),
       zagat_food_rating: faker.finance.amount(0, 5, 1),
-      reviews_count: faker.random.number(50),
+      review_count: faker.random.number(50),
       photos: [faker.image.food() + '/' + faker.random.number(10), 
         faker.image.food() + '/' + faker.random.number(10), 
         faker.image.food() + '/' + faker.random.number(10),
