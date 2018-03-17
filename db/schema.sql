@@ -13,7 +13,7 @@ CREATE TABLE restaurants (
   address VARCHAR(100) NOT NULL,
   website VARCHAR(50),
   price_level SMALLINT NOT NULL,
-  TYPE VARCHAR(25) NOT NULL
+  type VARCHAR(25) NOT NULL
 );
 
 CREATE TABLE restaurant_photos (
