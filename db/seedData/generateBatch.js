@@ -30,7 +30,7 @@ function generateBatch(x) {
       },
       address: faker.address.streetAddress('###'),
       website: faker.internet.url(),
-      price_level: faker.random.number(3),
+      price_level: faker.random.number(3) + 1,
       types: [placeTypes[faker.random.number(5)]],
       nearby: [faker.random.number(100000),
         faker.random.number(100000),
