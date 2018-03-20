@@ -3,10 +3,12 @@ CREATE DATABASE marzagat;
 \c marzagat;
 
 CREATE TABLE restaurants (
-  id INTEGER PRIMARY KEY,
+  restaurant_id INTEGER,
   name VARCHAR(50) NOT NULL,
   neighborhood VARCHAR(50) NOT NULL,
+  google_rating NUMERIC(2,1) NOT NULL,
   zagat_rating NUMERIC(2,1) NOT NULL,
+  review_count SMALLINT NOT NULL,
   description TEXT NOT NULL,
   latitude NUMERIC(7,4) NOT NULL,
   longitude NUMERIC(7,4) NOT NULL,
@@ -17,21 +19,13 @@ CREATE TABLE restaurants (
 );
 
 CREATE TABLE restaurant_photos (
-  photo_id INTEGER PRIMARY KEY,
-  restaurant_id INTEGER NOT NULL REFERENCES restaurants(id),
+  photo_id INTEGER,
+  restaurant_id INTEGER NOT NULL,
   photo_url VARCHAR(100)
 );
 
 CREATE TABLE nearby_restaurants (
-  restaurant_id INTEGER NOT NULL REFERENCES restaurants(id),
-  nearby_id INTEGER NOT NULL REFERENCES restaurants(id),
-  nearby_rank SMALLINT NOT NULL,
-  PRIMARY KEY (restaurant_id, nearby_rank)
-);
-
-CREATE TABLE reviews (
-  review_id INTEGER PRIMARY KEY,
-  restaurant_id INTEGER NOT NULL REFERENCES restaurants(id),
-  review TEXT,
-  rating SMALLINT NOT NULL
+  restaurant_id INTEGER NOT NULL,
+  nearby_id INTEGER NOT NULL,
+  nearby_rank SMALLINT NOT NULL
 );
