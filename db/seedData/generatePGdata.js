@@ -8,8 +8,9 @@ function generateRestaurantDataBatch(round) {
     return Promise.resolve(null);
   }
   let data = [];
-  for (var x = 0; x < 10000; x++) {
-    let restId = (10000 * round) + x;
+  let batchSize = 10000;
+  for (var x = 0; x < batchSize; x++) {
+    let restId = (batchSize * round) + x;
     let restaurantRow = generateRestaurantObj(restId);
     data.push(restaurantRow);
   }
@@ -34,28 +35,22 @@ function generateRestaurantObj(restaurantId) {
   }
 }
 
+
+
 function generateNearbyDataBatch(round) {
-  if (round > 6002) {
+  if (round > 10000) {
     return Promise.resolve(null);
   }
   let data = [];
-  let numIds = setNumIds(round);
-  for (var x = 0; x < numIds; x++) {
-    let restId = (round * 1666) + x;
+  let batchSize = 1000;
+  for (var x = 0; x < batchSize; x++) {
+    let restId = (round * batchSize) + x;
     for (var y = 1; y < 7; y++) {
       let nearbyObj = generateNearbyObj(restId, y);
       data.push(nearbyObj);
     }
   }
   return Promise.resolve(data);
-}
-
-function setNumIds(round){
-  if (round !== 6002) {
-    return 1666;
-  } else {
-    return 668;
-  }
 }
 
 function generateNearbyObj(restId, nearbyRank) {
@@ -72,8 +67,9 @@ function generatePhotoDataBatch(round) {
   }
   let numPhotos = setNumPhotos(round);
   let data = [];
-  for (var x = 0; x < 1000; x++) {
-    let restId = (round * 1000) + x;
+  let batchSize = 1000;
+  for (var x = 0; x < batchSize; x++) {
+    let restId = (round * batchSize) + x;
     for (var y = 0; y < numPhotos; y++) {
       let photoId = restId * 10 + y;
       let photoObj = generatePhotoObj(photoId, restId);
@@ -91,6 +87,8 @@ function generatePhotoObj(photoId, restId) {
   }
 }
 
+// Create distribution of photos from 2 - 6 for restaurants at different_ids
+// to minimize the amount of photos rows needed to be generated
 function setNumPhotos(round) {
   if (round < 1000) {
     return 4;

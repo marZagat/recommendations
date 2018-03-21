@@ -1,10 +1,17 @@
+require('dotenv').config();
+
 const pgp = require('pg-promise')({
   capSQL: true
 });
 
 const generate = require('./generatePGdata');
 
-const db = pgp('postgres://postgres:testpw@localhost:5432/marzagat');
+let host = process.env.POSTGRES_HOST;
+let username = process.env.POSTGRES_USER;
+let password = process.env.POSTGRES_PW;
+let port = process.env.POSTGRES_PORT;
+
+const db = pgp(`postgres://${username}:${password}@${host}:${port}/marzagat`);
 
 const csRestaurants = new pgp.helpers.ColumnSet([
   'restaurant_id',
