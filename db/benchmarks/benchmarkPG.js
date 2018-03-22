@@ -15,7 +15,11 @@ const connect = async () => {
 
   async function findRowForId(x) {
     let start = Date.now();
-    await client.query(`SELECT * FROM restaurants WHERE restaurant_id = ${x}`);
+    await client.query(`
+    SELECT (r.*, p.*) FROM restaurants r JOIN restaurant_photos p
+      ON (r.restaurant_id = p.restaurant_id)
+      WHERE r.restaurant_id = ${x}`
+    );
     let end = Date.now();
     return end - start;
   }
@@ -23,7 +27,11 @@ const connect = async () => {
   async function findRowNTimes(x, n) {
     let start = Date.now();
     for (var x = 0; x < n; x++) {
-      await client.query(`SELECT * FROM restaurants WHERE restaurant_id = ${x}`);
+      await client.query(`
+      SELECT (r.*, p.*) FROM restaurants r JOIN restaurant_photos p
+        ON (r.restaurant_id = p.restaurant_id)
+        WHERE r.restaurant_id = ${x}`
+      );
     }
     let end = Date.now();
     return end - start;
@@ -32,7 +40,11 @@ const connect = async () => {
   async function findRowsFromRange(first, last) {
     let start = Date.now();
     for (var x = first; x < last; x++) {
-      await client.query(`SELECT * FROM restaurants WHERE restaurant_id = ${x}`);
+      await client.query(`
+      SELECT (r.*, p.*) FROM restaurants r JOIN restaurant_photos p
+        ON (r.restaurant_id = p.restaurant_id)
+        WHERE r.restaurant_id = ${x}`
+      );
     }
     let end = Date.now();
     return end - start;
@@ -41,7 +53,11 @@ const connect = async () => {
   async function findRowsDivisbleBy500k() {
     let start = Date.now();
     for (var x = 0; x < 10000000; x += 500000) {
-      await client.query(`SELECT * FROM restaurants WHERE restaurant_id = ${x}`);
+      await client.query(`
+      SELECT (r.*, p.*) FROM restaurants r JOIN restaurant_photos p
+        ON (r.restaurant_id = p.restaurant_id)
+        WHERE r.restaurant_id = ${x}`
+      );
     }
     let end = Date.now();
     return end - start;
@@ -49,10 +65,13 @@ const connect = async () => {
 
   async function findNearbyRowsForId(x) {
     let start = Date.now();
-    await client.query(`SELECT * FROM restaurants
-        WHERE restaurant_id IN (
-          SELECT nearby_id FROM nearby_restaurants
-            WHERE restaurant_id = ${x})`);
+    await client.query(`
+      SELECT (r.*, p.*) FROM restaurants r JOIN restaurant_photos p
+        ON (r.restaurant_id = p.restaurant_id)
+        WHERE r.restaurant_id IN (
+          SELECT nearby_id from nearby_restaurants
+            WHERE restaurant_id = ${x})`
+    );
     let end = Date.now();
     return end - start;
   }
@@ -89,8 +108,8 @@ const connect = async () => {
 
   // Benchmark5: Retrieve the info for the restaurant with 
   // place_id / place_id 1234567 1000 times in a row.
-  // let benchmark5 = await findRowNTimes(1234567, 1000);
-  // console.log(`Benchmark 5: Found 1 row with id 1234567 1000 times in ${benchmark4} ms`);
+  let benchmark5 = await findRowNTimes(1234567, 1000);
+  console.log(`Benchmark 5: Found 1 row with id 1234567 1000 times in ${benchmark4} ms`);
 
   // // Benchmark6: Retrieve all info for all 10M restaurants 
   // // in the DB.
