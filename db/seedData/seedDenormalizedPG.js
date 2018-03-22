@@ -4,14 +4,14 @@ const pgp = require('pg-promise')({
   capSQL: true
 });
 
-const generate = require('./generatePGdata');
+const generate = require('./generatePGdataDenormalized');
 
-let host = process.env.POSTGRES_HOST;
-let username = process.env.POSTGRES_USER;
-let password = process.env.POSTGRES_PW;
-let port = process.env.POSTGRES_PORT;
+let host = process.env.POSTGRES_HOST || 'localhost';
+let username = process.env.POSTGRES_USER || 'postgres';
+let password = process.env.POSTGRES_PW || 'testpw';
+let port = process.env.POSTGRES_PORT || '5432';
 
-const db = pgp(`postgres://${username}:${password}@${host}:${port}/marzagat-denormalized`);
+const db = pgp(`postgres://${username}:${password}@${host}:${port}/marzagat_denormalized`);
 
 const csRestaurants = new pgp.helpers.ColumnSet([
   'restaurant_id',

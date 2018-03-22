@@ -1,6 +1,6 @@
-DROP DATABASE marzagat-denormalized;
-CREATE DATABASE marzagat-denormalized;
-\c marzagat-denormalized;
+DROP DATABASE marzagat_denormalized;
+CREATE DATABASE marzagat_denormalized;
+\c marzagat_denormalized;
 
 CREATE TABLE restaurants (
   restaurant_id INTEGER,
