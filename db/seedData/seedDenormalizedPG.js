@@ -75,9 +75,6 @@ db.tx('inserting-restaurants', t => {
       .catch(error => {
         console.log(error);
       })
-      .then((data) => {
-        console.log('inserted photos');
-      })
       .catch(error => {
         console.log(error);
       })
