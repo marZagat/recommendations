@@ -85,6 +85,9 @@ const connect = async () => {
     return end - start;
   }
   
+  // NOTES: benchmarks 4,5,6, & 10 can take a very long time depending on if
+  // indexes are built or not
+
   // Benchmark1: Retrieve the info for the restaurant with 
   // place_id / place_id 1234567 once.
   let benchmark1 = await findRowForId(1234567);
@@ -113,8 +116,8 @@ const connect = async () => {
 
   // // Benchmark6: Retrieve all info for all 10M restaurants 
   // // in the DB.
-  // let benchmark6 = await findRowsFromRange(0, 10000000);
-  // console.log(`Benchmark 6: Found all 10M docs in ${benchmark6} ms`);
+  let benchmark6 = await findRowsFromRange(0, 10000000);
+  console.log(`Benchmark 6: Found all 10M docs in ${benchmark6} ms`);
 
   // Benchmark7: Retrieve all info for all restaurants with 
   // ids divisible by 500,000

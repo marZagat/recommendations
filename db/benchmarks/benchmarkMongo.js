@@ -64,6 +64,8 @@ MongoClient.connect(url, (err, client) => {
     return end - start;
   }
 
+  // NOTES: benchmarks 4,5,6, & 10 can take a very long time depending on if
+  // indexes are built or not
   const benchmarkSuite = async () => {
     // Benchmark1: Retrieve the info for the restaurant with 
     // place_id / place_id 1234567 once.
@@ -88,13 +90,13 @@ MongoClient.connect(url, (err, client) => {
 
     // Benchmark5: Retrieve the info for the restaurant with 
     // place_id / place_id 1234567 1000 times in a row.
-    // let benchmark5 = await findDocNTimes(1234567, 1000);
-    // console.log(`Benchmark 5: Found 1 doc with id 1234567 1000 times in ${benchmark5} ms`);
+    let benchmark5 = await findDocNTimes(1234567, 1000);
+    console.log(`Benchmark 5: Found 1 doc with id 1234567 1000 times in ${benchmark5} ms`);
 
     // Benchmark6: Retrieve all info for all 10M restaurants 
     // in the DB.
-    // let benchmark6 = await findDocsInRange(0, 10000000);
-    // console.log(`Benchmark 6: Found all 10M docs in ${benchmark6} ms`);
+    let benchmark6 = await findDocsInRange(0, 10000000);
+    console.log(`Benchmark 6: Found all 10M docs in ${benchmark6} ms`);
 
     // Benchmark7: Retrieve all info for all restaurants with 
     // ids divisible by 500,000
