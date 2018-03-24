@@ -5,6 +5,8 @@ config:
       arrivalRate: 20
       name: "Testing 1000 rps"
   processor: "./loadTestHelpers.js"
+  http:
+    timeout: 2
 scenarios:
   - name: "Get popular restaurant"
     flow:
