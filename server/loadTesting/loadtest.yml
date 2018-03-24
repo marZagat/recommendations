@@ -1,0 +1,24 @@
+config:
+  target: 'http://localhost:3004'
+  phases:
+    - duration: 10
+      arrivalRate: 20
+      name: "Testing 1000 rps"
+  processor: "./loadTestHelpers.js"
+scenarios:
+  - name: "Get popular restaurant"
+    flow:
+    - loop: 
+      - get:
+            beforeRequest: "getPopularId"
+            url: "/api/restaurants/{{ id }}/recommendations/"
+      count: 50
+    weight: 4
+  - name: "Get normal restaurant"
+    flow:
+      - loop: 
+        - get:
+              beforeRequest: "getNormalId"
+              url: "/api/restaurants/{{ id }}/recommendations/"
+        count: 50
+    weight: 1
