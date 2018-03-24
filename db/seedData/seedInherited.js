@@ -16,6 +16,10 @@ MongoClient.connect(url, function(err, client) {
       console.log('inserted 100k');
     }
     console.log('done');
+    await db.collection('inheritedrestaurants').createIndex({ place_id: 1 }, function(err, result){
+      console.log(result);
+      callback(result);
+    })
     client.close();
     console.log('db disconnected');  
   }

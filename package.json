@@ -16,7 +16,8 @@
     "start": "node ./server/index.js",
     "dockertest": "npm run seed-database && npm start",
     "docker": "DB_ADDRESS=database npm run seed-database && DB_ADDRESS=database npm start",
-    "create-pg-db": "psql postgres -f ./db/schema.sql"
+    "create-pg-db": "psql postgres -f ./db/schema.sql",
+    "create-pg-db-denormalize": "psql postgres -f ./db/denormalized_schema.sql"
   },
   "dependencies": {
     "axios": "^0.18.0",
