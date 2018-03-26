@@ -34,9 +34,7 @@ app.get('/api/restaurants/:id/recommendations', cache, function (req, res) {
       res.status(500);
       console.log(err);
     } else{
-      // console.log("restaurant info:",data);
       var nearbyArr = data[0].nearby;
-      // console.log(nearbyArr);
       results.push(data[0]);
 
       restaurants.findMany(nearbyArr, (err, data)=> {
@@ -44,12 +42,8 @@ app.get('/api/restaurants/:id/recommendations', cache, function (req, res) {
           res.status(500);
           console.log(err);
         } else{
-          // console.log("recommended restaurants:", data);
           results.push(data)
-          // console.log("number of recommended: " + data.length);
           res.status(200);
-          // res.send(data);
-          // console.log(results.length);
           client.set(placeId, JSON.stringify(results));
           res.send(results);
         }
