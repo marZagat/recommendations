@@ -1,17 +1,17 @@
 {
-  "name": "WeGot-Recommendations",
+  "name": "marZagat-Recommendations",
   "version": "",
-  "description": "nearby recommendations",
-  "author": "Stacy Lin",
+  "description": "Display 6 closest restaurants",
+  "author": "Annisa Karaca & Stacy Lin",
   "license": "MIT",
   "engines": {
     "node": ">=6.13.0"
   },
   "scripts": {
-    "server": "nodemon ./server/index.js",
     "react-dev": "webpack -d --watch",
     "database": "mongod",
-    "seed-database": "node seed.js",
+    "seed-database": "node seedMongo.js",
+    "build": "webpack",
     "test": "jest",
     "start": "node ./server/index.js",
     "dockertest": "npm run seed-database && npm start",

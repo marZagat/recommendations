@@ -1,18 +1,26 @@
 require('newrelic');
 
+require('dotenv').config();
 const express = require('express');
 
 const redis = require('redis');
 const REDIS_PORT = 6379;
+const REDIS_ADDRESS = process.env.REDIS_ADDRESS || 'localhost';
+console.log('REDIS_ADDRESS: ', REDIS_ADDRESS);
 
 const app = express();
-const client = redis.createClient(REDIS_PORT);
 const bodyParser = require('body-parser');
 const path = require('path');
 const cors = require('cors');
 
-require('dotenv').config();
+let client;
 
+const connect = async () => {
+  client = await redis.createClient({
+    host: REDIS_ADDRESS
+  });
+  client.on('error', error => console.error(error));
+}
 
 var restaurants = require('../db/models/restaurant.js');
 var mongoose = require('mongoose');
