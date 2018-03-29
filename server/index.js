@@ -44,7 +44,7 @@ app.get('/api/restaurants/:id/recommendations', cache, function (req, res) {
         } else{
           results.push(data)
           res.status(200);
-          client.set(placeId, JSON.stringify(results));
+          client.setex(placeId, 3600, JSON.stringify(results));
           res.send(results);
         }
       });
