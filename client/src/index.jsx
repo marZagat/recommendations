@@ -18,7 +18,6 @@ class App extends React.Component{
   }
 
   getRecommendedRestaurants(){
-    // console.log(window.location.href);
     console.log(window.location.href.split('/'));
     var id = window.location.href.split('/')[4] || 10031;
     console.log('getting recommended restaurants for id: ' + id)
@@ -57,8 +56,5 @@ class App extends React.Component{
     )
   }
 }
-
-// ReactDOM.render(<App />, document.getElementById('recommendations-app'));
-
 
 module.exports = App;
