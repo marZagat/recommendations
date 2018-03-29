@@ -60,6 +60,8 @@ typings/
 #webpack bundle
 client/dist/bundle.js
 client/dist/bundle.js.map
+public/app-server.js
+public/app.js
 
 #api key
 config.js

@@ -18,12 +18,12 @@ class App extends React.Component{
   }
 
   getRecommendedRestaurants(){
-    // console.log(window.location.href);
+    console.log(window.location.href.split('/'));
     var id = window.location.href.split('/')[4] || 10031;
     console.log('getting recommended restaurants for id: ' + id)
 
     $.ajax({
-      url: `/api/restaurants/${id}/recommendations`,
+      url: `http://localhost:3004/api/restaurants/${id}/recommendations`,
       method: 'GET',
       success: (data) => {
         console.log('get success from client!', data);
@@ -57,4 +57,4 @@ class App extends React.Component{
   }
 }
 
-ReactDOM.render(<App />, document.getElementById('recommendations-app'));
+module.exports = App;

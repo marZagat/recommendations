@@ -11,6 +11,9 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const cors = require('cors');
 
+require('dotenv').config();
+
+
 var restaurants = require('../db/models/restaurant.js');
 var mongoose = require('mongoose');
 const dbAddress = process.env.DB_ADDRESS || 'localhost';
@@ -21,13 +24,12 @@ mongoose.connect(uri, { useMongoClient: true });
 app.use(cors());
 app.use(bodyParser.json());
 
-app.use('/', express.static(path.join(__dirname, '../client/dist')));
+app.use('/', express.static(path.join(__dirname, '../public')));
 app.use('/restaurants/:id', express.static(path.join(__dirname, '../client/dist')));
 
 app.get('/api/restaurants/:id/recommendations', cache, function (req, res) {
   var placeId = req.params.id || 0;
   console.log("GET " + req.url);
-  // find recommended restaurants based on id
   var results = [];
   restaurants.findOne(placeId, (err, data)=> {
     if(err){
