@@ -1,7 +1,12 @@
 require('newrelic');
 
 const express = require('express');
+
+const redis = require('redis');
+const REDIS_PORT = 6379;
+
 const app = express();
+const client = redis.createClient(REDIS_PORT);
 const bodyParser = require('body-parser');
 const path = require('path');
 const cors = require('cors');
@@ -22,7 +27,7 @@ app.use(bodyParser.json());
 app.use('/', express.static(path.join(__dirname, '../public')));
 app.use('/restaurants/:id', express.static(path.join(__dirname, '../client/dist')));
 
-app.get('/api/restaurants/:id/recommendations', function (req, res) {
+app.get('/api/restaurants/:id/recommendations', cache, function (req, res) {
   var placeId = req.params.id || 0;
   console.log("GET " + req.url);
   var results = [];
@@ -41,12 +46,26 @@ app.get('/api/restaurants/:id/recommendations', function (req, res) {
         } else{
           results.push(data)
           res.status(200);
+          client.setex(placeId, 3600, JSON.stringify(results));
           res.send(results);
         }
       });
     }
   });
 });
+
+function cache(req, res, next) {
+  const placeId = req.params.id;
+  client.get(placeId, function (err, data) {
+    if (data !== null) {
+      console.log('found cached info!')
+      let parsedData= JSON.parse(data);
+      res.send(parsedData);
+    } else {
+      next();
+    }
+  })
+}
 
 
 app.listen(3004, function () { console.log('WeGot app listening on port 3004!') });
