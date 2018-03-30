@@ -39,6 +39,11 @@ NOTE: You've now created the file referenced in seed.js as config.js that your a
 
 To start, in your browser navigate to: [http://localhost:3004](http://localhost:3004)
 
+### Docker
+This app can also be spun-up using Docker. The image for the recommendations server is created by the Dockerfile in this repo and can be created by running `docker build -t recommendations`. Alternately, the image can be downloaded from docker hub with the command `docker pull akaraca/marzagat_recommendations` (see hub.docker.com/r/akaraca/marzagat_recommendations/ for more information). 
+
+To create all of the containers for the recommendation service, the docker-compose.yml file can be used with the command `docker-compose up`. This spins up the containers for the recommendations server, MongoDB, and Redis. After the containers have been created and the app is running on port 3004, you can seed the MongoDB volume. If your recommendations server container is named 'recommendations_recommendations1', then the command to seed the database is `docker exec -it recommendations_recommendations1 npm run seed-database`.
+
 ## Tests
 Run: `npm test`
 
