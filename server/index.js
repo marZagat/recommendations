@@ -22,11 +22,13 @@ const connect = async () => {
   client.on('error', error => console.error(error));
 }
 
+connect();
+
 var restaurants = require('../db/models/restaurant.js');
 var mongoose = require('mongoose');
-const dbAddress = process.env.DB_ADDRESS || 'localhost';
+const dbAddress = process.env.MONGO_ADDRESS || 'localhost';
 
-var uri = `mongodb://${dbAddress}/wegot`;
+var uri = `mongodb://${dbAddress}/marzagat`;
 mongoose.connect(uri, { useMongoClient: true });
 
 app.use(cors());

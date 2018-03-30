@@ -21,7 +21,6 @@ MongoClient.connect(url, function(err, client) {
     console.log('done');
     await db.collection('restaurants').createIndex({ place_id: 1 }, function(err, result){
       console.log(result);
-      callback(result);
     })
     client.close();
     console.log('db disconnected');  

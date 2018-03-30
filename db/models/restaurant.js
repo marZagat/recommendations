@@ -17,7 +17,7 @@ var restaurantSchema = mongoose.Schema({
   nearby: [String]
 });
 
-var RestaurantModel = mongoose.model('inheritedrestaurants', restaurantSchema);
+var RestaurantModel = mongoose.model('restaurants', restaurantSchema);
 
 // findAll retrieves all stories
 function findAll(callback) {
@@ -29,7 +29,6 @@ function findAll(callback) {
 function findOne(id, callback) {
   console.log("find " + id);
   RestaurantModel.find({place_id: id}, callback);
-  // RestaurantModel.find({place_id: 'ChIJFUBxSY6AhYARwOaLV7TsLjw'}, callback);
 }
 
 // insertOne inserts a restaurant into the db

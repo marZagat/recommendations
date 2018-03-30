@@ -10,7 +10,7 @@
   "scripts": {
     "react-dev": "webpack -d --watch",
     "database": "mongod",
-    "seed-database": "node seedMongo.js",
+    "seed-database": "node ./db/seedData/seedMongo.js",
     "build": "webpack",
     "test": "jest",
     "start": "node ./server/index.js",
