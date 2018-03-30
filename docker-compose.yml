@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  recommendations:
+    build: /.
+    image: recommendations
+    environment:
+      - MONGO_ADDRESS=mongo
+      - REDIS_ADDRESS=redis
+    depends_on:
+      - 'mongo'
+      - 'redis'
+    ports: 
+      - 3004:3004
+  
+  mongo:
+    image: mongo:3.6
+    volumes:
+      - recommendations-db:/var/lib/docker
+  
+  redis:
+    image: redis:3.2-alpine
+
+volumes:
+  recommendations-db:
